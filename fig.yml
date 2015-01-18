@@ -1,0 +1,21 @@
+db:
+  image: kartoza/postgis
+  volumes:
+    - ./pg_sentry/postgres_data:/var/lib/postgresql
+  environment:
+    - USERNAME=docker
+    - PASS=docker
+
+sentry:
+  image: kartoza/sentry
+  hostname: sentry
+  links:
+    - db:db
+
+createsuperuser:
+  image: kartoza/sentry
+  hostname: sentry
+  links:
+    - db:db
+  command: createsuperuser
+
