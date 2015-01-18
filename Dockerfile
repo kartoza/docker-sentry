@@ -1,12 +1,10 @@
-FROM crosbymichael/python
+FROM python:2.7.8
 
 RUN apt-get update && apt-get install -y \
     postgresql-client-common \
-    libpq-dev \
-    mysql-client \
-    libmysqlclient-dev
+    libpq-dev
 
-RUN pip install MySQL-python psycopg2 sentry redis
+RUN pip install psycopg2 sentry redis
 
 EXPOSE 9000
 ONBUILD ADD sentry.conf.py /sentry.conf.py
